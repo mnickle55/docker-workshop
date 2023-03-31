@@ -1,0 +1,37 @@
+version: "3"
+services:
+  db:
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    expose:
+      - 5432
+    networks:
+      - my_network
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: testDB
+
+  ui:
+    build: ./ui
+    ports:
+      - 3000:3000
+    networks:
+      - my_network
+    depends_on:
+      - api
+  api:
+    build: ./api
+    ports:
+      - 8080:8080
+    networks:
+      - my_network
+    environment:
+      DB_CONNECTION_STRING: postgres://postgres:password@db:5432/testDB
+    depends_on:
+      - db
+
+networks:
+  my_network:
+    driver: bridge
