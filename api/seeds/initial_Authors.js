@@ -5,7 +5,7 @@ exports.seed = function(knex) {
   return knex('authors').del()
     .then(function () {
       // Inserts seed entries
-      return knex('Authors').insert([
+      return knex('authors').insert([
         {name: 'Mackenzie Nickle'},
         {name: 'Madison Yancey'},
         {name: 'Mike Blumberg'},

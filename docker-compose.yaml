@@ -12,6 +12,9 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
       POSTGRES_DB: testDB
+    volumes:
+      - /docker/volumes/postgres:/var/lib/postgresql/data
+  
 
   ui:
     build: ./ui
